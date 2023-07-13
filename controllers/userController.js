@@ -1,110 +1,57 @@
-const User = require('../models/User');
-
-exports.getAllUsers = async (req, res) => {
-    try {
-        const users = await User.find();
-        res.status(200).json({
-            status: 'success',
-            results: users.length,
-            data: {
-                users,
-            },
-        });
-    } catch (err) {
-        res.status(404).json({
-            status: 'fail',
-            message: err,
-        }); 
-    }
-};
-
-exports.getUserById = async (req, res) => {
-    try {
-        const user = await User.findById(req.params.id);
-        res.status(200).json({
-            status: 'success',
-            data: {
-                user,
-            },
-        });
-    } catch (err) {
-        res.status(404).json({
-            status: 'fail',
-            message: err,
-        }); 
-    }
-};
-
-exports.createUser = async (req, res) => {
-    try {
-        const user = await User.create(req.body);
-        res.status(201).json({
-            status: 'success',
-            data: {
-                user,
-            },
-        });
-    } catch (err) {
-        res.status(400).json({
-            status: 'fail',
-            message: err,
-        }); 
-    }
-};
-
-exports.deleteUser = async (req, res) => {
-    try {
-        const user = await User.findByIdAndDelete(req.params.id);
-        if (!user) {
-            return res.status(404).json({
-                status: 'fail',
-                message: 'No user found with that ID',
-            });
-        }
-        res.status(204).json({
-            status: 'success',
-            data: null,
-        });
-    } catch (err) {
-        res.status(400).json({
-            status: 'fail',
-            message: err,
-        });
-    }
-};
-
-exports.updateUser = async (req, res) => {
-    try {
-        const user = await User.findByIdAndUpdate(req.params.id, req.body, {
-            new: true, 
-            runValidators: true,  
-        });
-        
-        if (!user) {
-            return res.status(404).json({
-                status: 'fail',
-                message: 'No user found with that ID',
-            });
-        }
-
-        res.status(200).json({
-            status: 'success',
-            data: {
-                user,
-            },
-        });
-    } catch (err) {
-        res.status(400).json({
-            status: 'fail',
-            message: err,
-        });
-    }
-};
+const { User } = require('../models');
 
 module.exports = {
-    getAllUsers,
-    getUserById,
-    createUser,
-    deleteUser,
-    updateUser,
+    // get all users
+    async getAllUsers(req, res) {
+        try {
+            const users = await User.find();
+            res.json(users);
+        } catch (err) {
+            res.status(400).json(err);
+        }
+    },
+    // get one user by id
+    async getSingleUser(req, res) {
+        try {
+            const user = await User.findOne({ _id: req.params.userId });
+
+            if (!user) {
+                return res.status(404).json({ message: 'No user with this id!' });
+            }
+            res.json(user);
+        } catch (err) {
+            res.status(400).json(err);
+        }
+    },
+    // create a user
+    async createUser(req, res) {
+        try {
+            const user = await User.create(req.body);
+            res.json(user);
+        } catch (err) {
+            res.status(400).json(err);
+        }
+    },
+    // update a user by id
+    async updateUser(req, res) {
+        try {
+            const user = await User.findOneAndUpdate({_id: req.params.userId}, req.body, {new: true, runValidators: true});
+
+        } catch (err) {
+            res.status(400).json(err);
+        }
+    },
+    // delete a user by id
+    async deleteUser(req, res) {
+        try {
+            const user = await User.findOneAndDelete({ _id: req.params.userId });
+
+            if (!user) {
+                return res.status(404).json({ message: 'No user with this id!' });
+            }
+            res.json(user);
+        } catch (err) {
+            res.status(400).json(err);
+        }
+    }
 }

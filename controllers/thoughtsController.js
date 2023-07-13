@@ -1,7 +1,7 @@
 const Thought = require('../models/Thought');
 const ReactionSchema = require('../models/Reaction');
 
-exports.getAllThoughts = async (req, res) => {
+const getAllThoughts = async (req, res) => {
     try {
         const thoughts = await Thought.find();
         res.status(200).json({
@@ -19,7 +19,7 @@ exports.getAllThoughts = async (req, res) => {
     }
 };
 
-exports.getThoughtById = async (req, res) => {
+const getThoughtById = async (req, res) => {
     try {
         const thought = await Thought.findById(req.params.id);
         res.status(200).json({
@@ -36,7 +36,7 @@ exports.getThoughtById = async (req, res) => {
     }
 };
 
-exports.createThought = async (req, res) => {
+const createThought = async (req, res) => {
     try {
         const thought = await Thought.create(req.body);
         res.status(201).json({
@@ -53,7 +53,7 @@ exports.createThought = async (req, res) => {
     }
 };
 
-exports.updateThought = async (req, res) => {
+const updateThought = async (req, res) => {
     try {
         const thought = await Thought.findByIdAndUpdate(req.params.id, req.body, {
             new: true,
@@ -79,7 +79,7 @@ exports.updateThought = async (req, res) => {
     }
 };
 
-exports.deleteThought = async (req, res) => {
+const deleteThought = async (req, res) => {
     try {
         const thought = await Thought.findByIdAndDelete(req.params.id);
         if (!thought) {
@@ -100,13 +100,10 @@ exports.deleteThought = async (req, res) => {
     }
 };
 
-
 module.exports = {
-    getAllThoughts: this.getAllThoughts,
-    getThoughtById: this.getThoughtById,
-    createThought: this.createThought,
-    updateThought: this.updateThought,
-    deleteThought: this.deleteThought,
+    getAllThoughts,
+    getThoughtById,
+    createThought,
+    updateThought,
+    deleteThought,
 };
-
-
