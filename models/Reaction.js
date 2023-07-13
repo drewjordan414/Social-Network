@@ -1,10 +1,12 @@
 const mongoose = require('mongoose');
+const { Timestamp } = require('bson');
+const { Schema, model } = require('mongoose');
 
-const ReactionSchema = new mongoose.Schema(
+const ReactionSchema = new Schema(
     {
         reactionId: {
             type: mongoose.Schema.Types.ObjectId,
-            default: () => new mongoose.Types.ObjectId(),
+            default: () => new Types.ObjectId(),
         },
         reactionBody: {
             type: String,
@@ -18,7 +20,7 @@ const ReactionSchema = new mongoose.Schema(
         createdAt: {
             type: Date,
             default: Date.now,
-            get: createdAtVal => dateFormat(createdAtVal)
+            get: (timestamp) => dateFormat(timestamp),
         }
     },
     {
@@ -27,5 +29,7 @@ const ReactionSchema = new mongoose.Schema(
         }
     }
 );
+
+// const reactionSchema = model('Reaction', ReactionSchema);
 
 module.exports = ReactionSchema;

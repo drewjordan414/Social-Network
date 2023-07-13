@@ -1,5 +1,5 @@
 const router = require('express').Router({ mergeParams: true });
-const { addFriend, removeFriend } = require('../controllers/friendsController');
+const { addFriend, removeFriend } = require('../../controllers/friendsController');
 
 router
     .route('/:friendId')
