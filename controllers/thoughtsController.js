@@ -1,4 +1,5 @@
 const Thought = require('../models/Thought');
+const ReactionSchema = require('../models/Reaction');
 
 exports.getAllThoughts = async (req, res) => {
     try {
@@ -98,3 +99,4 @@ exports.deleteThought = async (req, res) => {
         });
     }
 };
+

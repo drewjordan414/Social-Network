@@ -28,4 +28,4 @@ const ReactionSchema = new mongoose.Schema(
     }
 );
 
-module.exports = Reaction;
+module.exports = ReactionSchema;
