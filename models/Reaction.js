@@ -1,35 +1,33 @@
-const mongoose = require('mongoose');
-const { Timestamp } = require('bson');
+const { Ttimestamp } = require('bson');
 const { Schema, model } = require('mongoose');
+const dateFormat = require('../utils/dateFormat');
 
-const ReactionSchema = new Schema(
-    {
-        reactionId: {
-            type: mongoose.Schema.Types.ObjectId,
-            default: () => new Types.ObjectId(),
-        },
-        reactionBody: {
-            type: String,
-            required: true,
-            maxlength: 280
-        },
-        username: {
-            type: String,
-            required: true,
-        },
-        createdAt: {
-            type: Date,
-            default: Date.now,
-            get: (timestamp) => dateFormat(timestamp),
-        }
+const ReactionSchema = new Schema({
+    reactionId: {
+        type: Schema.Types.ObjectId,
+        default: () => new Types.ObjectId(),
     },
-    {
-        toJSON: {
-            getters: true
-        }
-    }
+    reactionBody: {
+        type: String,
+        required: true,
+        maxLength: 280,
+    },
+    username: {
+        type: String,
+        required: true,
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+        get: (timestamp) => dateFormat(timestamp),
+    } 
+},
+{
+    toJSON: {
+        getters: true
+    },
+    id: false
+}
 );
 
-// const reactionSchema = model('Reaction', ReactionSchema);
-
-module.exports = ReactionSchema;
+module.exports = reactionSchema;
