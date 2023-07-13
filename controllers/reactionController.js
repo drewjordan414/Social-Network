@@ -29,38 +29,3 @@ exports.deleteReaction = async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 };
-
-exports.getAllThoughts = async (req, res) => {
-    try {
-        const thoughts = await Thought.find();
-        res.status(200).json({
-            status: 'success',
-            results: thoughts.length,
-            data: {
-                thoughts,
-            },
-        });
-    } catch (err) {
-        res.status(404).json({
-            status: 'fail',
-            message: err,
-        }); 
-    }
-};
-
-exports.getThoughtById = async (req, res) => {
-    try {
-        const thought = await Thought.findById(req.params.id);
-        res.status(200).json({
-            status: 'success',
-            data: {
-                thought,
-            },
-        });
-    } catch (err) {
-        res.status(404).json({
-            status: 'fail',
-            message: err,
-        }); 
-    }
-};
