@@ -1,4 +1,4 @@
-const userRoutes = require('./usersRoutes');
+const userRoutes = require('./userRoutes');
 const thoughtRoutes = require('./thoughtsRoutes');
 const reactionRoutes = require('./reactionsRoutes');
 const friendRoutes = require('./friendsRoutes');
