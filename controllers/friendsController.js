@@ -29,3 +29,8 @@ exports.removeFriend = async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 };
+
+module.exports = {
+    addFriend: this.addFriend,
+    removeFriend: this.removeFriend,
+};

@@ -100,3 +100,11 @@ exports.deleteThought = async (req, res) => {
     }
 };
 
+
+module.exports = {
+    getAllThoughts: this.getAllThoughts,
+    getThoughtById: this.getThoughtById,
+    createThought: this.createThought,
+    updateThought: this.updateThought,
+    deleteThought: this.deleteThought,
+};

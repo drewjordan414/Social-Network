@@ -29,3 +29,9 @@ exports.deleteReaction = async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 };
+
+
+module.exports = {
+    createReaction: this.createReaction,
+    deleteReaction: this.deleteReaction,
+};

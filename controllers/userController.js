@@ -100,3 +100,11 @@ exports.updateUser = async (req, res) => {
         });
     }
 };
+
+module.exports = {
+    getAllUsers,
+    getUserById,
+    createUser,
+    deleteUser,
+    updateUser,
+}
