@@ -24,5 +24,5 @@ const usernames = [
     'user10@example.com',
   ];
   
-  module.exports = { usernames, emails };
+module.exports = { usernames, emails };
   
