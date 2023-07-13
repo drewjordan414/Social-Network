@@ -108,3 +108,5 @@ module.exports = {
     updateThought: this.updateThought,
     deleteThought: this.deleteThought,
 };
+
+
