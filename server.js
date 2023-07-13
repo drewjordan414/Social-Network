@@ -1,10 +1,7 @@
 // housekeeping
 const express = require('express');
 const mongoose = require('mongoose');
-const userRoutes = require('./routes/usersRoutes');
-const thoughtRoutes = require('./routes/thoughtsRoutes');
-const reactionRoutes = require('./routes/reactionsRoutes');
-const friendRoutes = require('./routes/friendsRoutes');
+const routes = require('./routes');
 
 // express app
 const app = express();
@@ -18,10 +15,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // routes
-app.use('/api/users', userRoutes);
-app.use('/api/thoughts', thoughtRoutes);
-app.use('/api/thoughts/:thoughtId/reactions', reactionRoutes);
-app.use('/api/users/:userId/friends', friendRoutes);
+app.use('/api/users', routes.userRoutes);
+app.use('/api/thoughts', routes.thoughtRoutes);
+app.use('/api/thoughts/:thoughtId/reactions', routes.reactionRoutes);
+app.use('/api/users/:userId/friends', routes.friendRoutes);
 
 // default response for any other request (Not Found)
 app.use((req, res) => {
