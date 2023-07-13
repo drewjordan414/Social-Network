@@ -1,6 +1,6 @@
 const Thought = require('../models/Thought');
 
-exports.createReaction = async (req, res) => {
+const createReaction = async (req, res) => {
     const thought = await Thought.findById(req.params.thoughtId);
     if (!thought) {
         return res.status(404).json({ message: 'Thought not found' });
@@ -15,7 +15,7 @@ exports.createReaction = async (req, res) => {
     }
 };
 
-exports.deleteReaction = async (req, res) => {
+const deleteReaction = async (req, res) => {
     const thought = await Thought.findById(req.params.thoughtId);
     if (!thought) {
         return res.status(404).json({ message: 'Thought not found' });
@@ -30,8 +30,7 @@ exports.deleteReaction = async (req, res) => {
     }
 };
 
-
 module.exports = {
-    createReaction: this.createReaction,
-    deleteReaction: this.deleteReaction,
+    createReaction,
+    deleteReaction,
 };
