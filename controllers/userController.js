@@ -76,8 +76,8 @@ exports.deleteUser = async (req, res) => {
 exports.updateUser = async (req, res) => {
     try {
         const user = await User.findByIdAndUpdate(req.params.id, req.body, {
-            new: true,  // Return the new version of the user
-            runValidators: true,  // Validate the updated document
+            new: true, 
+            runValidators: true,  
         });
         
         if (!user) {
