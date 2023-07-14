@@ -11,7 +11,7 @@ const thoughtSchema = new Schema({
     createdAt: {
         type: Date,
         default: Date.now,
-        get: (timestamp) => dateFormat(timestamp),
+        get: (timestamp) => timestamp.toLocaleDateString(),  // <-- Updated code
     },
     username: {
         type: String,
@@ -25,8 +25,7 @@ const thoughtSchema = new Schema({
         getters: true
     },
     id: false
-},
-);
+});
 
 thoughtSchema.virtual('reactionCount').get(function() {
     return this.reactions.length;
