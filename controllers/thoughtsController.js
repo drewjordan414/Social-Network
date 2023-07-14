@@ -42,15 +42,31 @@ module.exports = {
         }
     },
     // update a thought by id
+    // async updateThought(req, res) {
+    //     try {
+    //         const thought = await Thought.findOneAndUpdate(
+    //             { _id: req.params.thoughtId },
+    //             req.body,
+    //             { new: true, runValidators: true },
+    //             res.json(thought)
+    //         );
+    //     } catch (err) {
+    //         res.status(400).json(err);
+    //     }
+    // },
     async updateThought(req, res) {
         try {
             const thought = await Thought.findOneAndUpdate(
                 { _id: req.params.thoughtId },
                 req.body,
-                { new: true, runValidators: true },
-                res.json(thought)
+                { new: true, runValidators: true }
             );
+            if (!thought) {
+                return res.status(404).json({ message: 'No thought with this id!' });
+            }
+            res.json(thought);
         } catch (err) {
+            console.error(err); // This will print the error message to your server console
             res.status(400).json(err);
         }
     },
@@ -68,22 +84,39 @@ module.exports = {
         }
     },
     // add a reaction to a thought
+    // async addReaction(req, res) {
+    //     try {
+    //         const thought = await Thought.findOneAndUpdate(
+    //             { _id: req.params.thoughtId },
+    //             { $push: { reactions: req.body } },
+    //             { new: true, runValidators: true },
+    //             res.json(reaction)
+    //         );
+    //         if (!thought) {
+    //             return res.status(404).json({ message: 'No thought with this id!' });
+    //         }
+    //         res.json(thought);
+    //     } catch (err) {
+    //         res.status(400).json(err);
+    //     }
+    // },
     async addReaction(req, res) {
         try {
             const thought = await Thought.findOneAndUpdate(
                 { _id: req.params.thoughtId },
                 { $push: { reactions: req.body } },
-                { new: true, runValidators: true },
-                res.json(reaction)
+                { new: true, runValidators: true }
             );
             if (!thought) {
                 return res.status(404).json({ message: 'No thought with this id!' });
             }
             res.json(thought);
         } catch (err) {
+            console.error(err); // This will print the error message to your server console
             res.status(400).json(err);
         }
     },
+    
     // remove a reaction from a thought
     async removeReaction(req, res) {
         try {

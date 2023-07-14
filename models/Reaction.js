@@ -1,5 +1,5 @@
 const { Timestamp } = require('bson');
-const { Schema, model } = require('mongoose');
+const { Schema, Types } = require('mongoose');
 
 const reactionSchema = new Schema({
     reactionId: {
@@ -18,7 +18,7 @@ const reactionSchema = new Schema({
     createdAt: {
         type: Date,
         default: Date.now,
-        get: (timestamp) => dateFormat(timestamp)
+        get: (timestamp) => timestamp.toLocaleDateString(),
     }
 },
     {
